@@ -27,7 +27,7 @@
             font-weight: bold;
             margin-top: 10px;
         }
-        input, select, textarea, button {
+        input, select, textarea {
             width: 100%;
             padding: 10px;
             margin-top: 5px;
@@ -40,127 +40,113 @@
         }
         button {
             background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
+            color:white; 
+            border:none; 
+            cursor:pointer; 
+        }
+        button:hover{
+            background-color:#45a049; 
+        }
+        
+        /* Agregar estilos para el sistema de grilla */
+        .grid-container {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 10px;
+
+          /* Responsive design */
+          @media (max-width :600 px) { 
+             grid-template-columns :repeat(1 ,1 fr); 
+           }  
+       }
+
+       .grid-item{
+         padding :20 px ;
+         border : none ;  
+         border - radius :8 px ;  
+       }  
+
+       .grid - item label {   
+         font - weight : bold ;   
+         display:block ;
+       } 
+
+
     </style>
 </head>
+
 <body>
 
 <h1>Ficha Clínica de Evaluación Postural</h1>
 
-<form action="https://script.google.com/macros/s/AKfycbxaG8RNXSAmBNlS1_Z8K9lgepvaP0ViiJfkqWmrrqk/exec" method="POST" enctype="multipart/form-data">
+<form action="" method="POST" id="formulario">
 
-    <!-- Datos Generales -->
-    <label for="nombre">Nombre del paciente:</label>
-    <input type="text" id="nombre" name="nombre" required>
+<div class = "grid-container">
 
-    <label for="edad">Edad:</label>
-    <input type="number" id="edad" name="edad" required>
+<!-- Información personal -->
+<div class = "grid-item">   
+<label for ="nombre">Nombre del paciente:</label>    
+<input type = "text" id ="nombre" name ="nombre" required>      
+</div > 
 
-    <label for="genero">Género:</label>
-    <select id="genero" name="genero" required>
-        <option value="Masculino">Masculino</option>
-        <option value="Femenino">Femenino</option>
-        <option value="Otro">Otro</option>
-    </select>
+<div class = "grid-item">     
+<label for= "edad ">Edad:</label>       
+<input type= "number"id= "edad"name= "edad"required >       
+</div>
 
-    <label for="fecha">Fecha de evaluación:</label>
-    <input type="date" id="fecha" name="fecha" required>
+<!-- Historia médica -->
+<div class = "grid-item">    
+<label for ="historia ">Historia médica:</label>    
+<textarea id ="historia" name ="historia"></textarea>      
+</div > 
 
-    <label for="motivo">Motivo de consulta:</label>
-    <textarea id="motivo" name="motivo" required></textarea>
+<div class = "grid-item">     
+<label for= "enfermedad ">Enfermedad crónica:</label>       
+<select id="enfermedad" name="enfermedad">
+<option value="">Seleccione una opción</option>
+<option value="si">Sí</option>
+<option value="no">No</option>
+</select>       
+</div>
 
-    <!-- Análisis Postural -->
-    <h2>Evaluación Postural (Cefalocaudal)</h2>
+<!-- Síntomas actuales -->
+<div class = "grid-item">    
+<label for ="sintomas ">Síntomas actuales:</label>    
+<textarea id ="sintomas" name ="sintomas"></textarea>      
+</div > 
 
-    <label for="cabeza">1. Cabeza y cuello (Inclinación lateral):</label>
-    <select id="cabeza" name="cabeza" required>
-        <option value="Derecha">Derecha</option>
-        <option value="Izquierda">Izquierda</option>
-        <option value="Ninguna">Ninguna</option>
-    </select>
+<!-- Observaciones y conclusiones -->
+<div class = "grid-item">    
+<label for= hallazgos>Hallazgos principales :</label>      
+<textarea id =hallazgos name =hallazgos required></textarea >      
+</div>
 
-    <label for="rotacion_cervical">Rotación cervical:</label>
-    <select id="rotacion_cervical" name="rotacion_cervical" required>
-        <option value="Derecha">Derecha</option>
-        <option value="Izquierda">Izquierda</option>
-        <option value="Ninguna">Ninguna</option>
-    </select>
+<!-- Enviar -->  
+<button type ="submit ">Enviar </button >   
 
-    <label for="protraccion_cervical">Protracción/retracción cervical:</label>
-    <input type="text" id="protraccion_cervical" name="protraccion_cervical">
+<p id ="mensaje-exito"></p >
+   
+   </div >
+   </form >
 
-    <label for="hombros">2. Hombros y cintura escapular:</label>
-    <select id="hombros" name="hombros" required>
-        <option value="Simétrica">Simétrica</option>
-        <option value="Asimétrica">Asimétrica</option>
-    </select>
+   <!-- AgregarJavaScriptpara validarformulariomostrar mensajeexito-->
+   <script >
+     const formulario=document.getElementById('formulario');
+     const mensajeExito=document.getElementById('mensaje-exito');
 
-    <label for="rotacion_escapular">Rotación escapular:</label>
-    <select id="rotacion_escapular" name="rotacion_escapular" required>
-        <option value="Normal">Normal</option>
-        <option value="Anteriorizada">Anteriorizada</option>
-        <option value="Posteriorizada">Posteriorizada</option>
-    </select>
+     // Validarfomularioantesdeenviar
+     functionvalidarFormulario(event){
+      event.preventDefault();
+      //Lógicadevalidacióndeformularionvaacá
 
-    <label for="comentarios_hombros">Comentarios adicionales sobre hombros:</label>
-    <textarea id="comentarios_hombros" name="comentarios_hombros"></textarea>
+      //Sielpasodatosésvalido,muestreunmensajedeéxito.
+      mensajeeXito.innerText='¡Su solicitudha sidosendecidamente!';
+     }
 
-    <label for="torax">3. Tórax y columna vertebral (Simetría):</label>
-    <select id="torax" name="torax" required>
-        <option value="Normal">Normal</option>
-        <option value="Asimétrica">Asimétrica</option>
-    </select>
+    // Escuchar eventosdelbotón Enviar.
+     formularios.addEventListener ('submit ',validarFormulario);
 
-    <label for="forma_torax">Forma del tórax:</label>
-    <input type="text" id="forma_torax" name="forma_torax">
+   </script >
 
-    <label for="comentarios_torax">Comentarios adicionales sobre tórax:</label>
-    <textarea id="comentarios_torax" name="comentarios_torax"></textarea>
-
-    <label for="pelvis">4. Pelvis y miembros inferiores:</label>
-    <select id="pelvis" name="pelvis" required>
-        <option value="Normal">Normal</option>
-        <option value="Anterior">Anterior</option>
-        <option value="Posterior">Posterior</option>
-    </select>
-
-    <label for="alt_crestas">Altura de crestas ilíacas:</label>
-    <select id="alt_crestas" name="alt_crestas" required>
-        <option value="Simétrica">Simétrica</option>
-        <option value="Asimétrica">Asimétrica</option>
-    </select>
-
-    <label for="rodillas">Rodillas:</label>
-    <select id="rodillas" name="rodillas" required>
-        <option value="Normales">Normales</option>
-        <option value="Genu varo">Genu varo</option>
-        <option value="Genu valgo">Genu valgo</option>
-    </select>
-
-    <label for="comentarios_pelvis">Comentarios adicionales sobre pelvis:</label>
-    <textarea id="comentarios_pelvis" name="comentarios_pelvis"></textarea>
-
-    <!-- Carga de imágenes -->
-    <label for="imagen">Cargar imágenes de la evaluación postural:</label>
-    <input type="file" id="imagen" name="imagen" accept="image/*">
-
-    <!-- Observaciones y Conclusiones -->
-    <label for="hallazgos">Hallazgos principales:</label>
-    <textarea id="hallazgos" name="hallazgos" required></textarea>
-
-    <label for="recomendaciones">Recomendaciones:</label>
-    <textarea id="recomendaciones" name="recomendaciones" required></textarea>
-
-    <!-- Enviar -->
-    <button type="submit">Enviar</button>
-
-</form>
-
-</body>
-</html>
+   </body >
+   </html >
